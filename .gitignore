@@ -4,9 +4,7 @@
 
 # Allow hypr/ folder
 !hypr/
-!hypr/*
-!hypr/UserConfigs/
-!hypr/UserConfigs/**
-!hypr/UserScripts/
-!hypr/UserScripts/**
+!hypr/**
 
+!waybar/
+!waybar/**
