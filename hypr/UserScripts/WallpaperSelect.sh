@@ -4,7 +4,6 @@
 
 # WALLPAPERS PATH
 terminal=kitty
-wallDIR="$HOME/Pictures/wallpapers"
 SCRIPTSDIR="$HOME/.config/hypr/scripts"
 wallpaper_current="$HOME/.config/hypr/wallpaper_effects/.wallpaper_current"
 
@@ -59,7 +58,7 @@ kill_wallpaper_for_image() {
 }
 
 # Retrieve wallpapers (both images & videos)
-mapfile -d '' PICS < <(find -L "${wallDIR}" -type f \( \
+mapfile -d '' PICS < <(find -L "${WALLPAPERS_DIR}" -type f \( \
   -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" -o \
   -iname "*.bmp" -o -iname "*.tiff" -o -iname "*.webp" -o \
   -iname "*.mp4" -o -iname "*.mkv" -o -iname "*.mov" -o -iname "*.webm" \) -print0)
@@ -123,9 +122,9 @@ set_sddm_wallpaper() {
         notify-send -i "$iDIR/error.png" "Missing $terminal" "Install $terminal to enable setting of wallpaper background"
         exit 1
       fi
-	  
-	  exec $SCRIPTSDIR/sddm_wallpaper.sh --normal
-    
+
+   exec $SCRIPTSDIR/sddm_wallpaper.sh --normal
+
     fi
   fi
 }
@@ -174,7 +173,7 @@ apply_image_wallpaper() {
   "$SCRIPTSDIR/Refresh.sh"
   sleep 1
 
-  set_sddm_wallpaper
+  # set_sddm_wallpaper
 }
 
 apply_video_wallpaper() {
@@ -210,7 +209,7 @@ main() {
   choice_basename=$(basename "$choice" | sed 's/\(.*\)\.[^.]*$/\1/')
 
   # Search for the selected file in the wallpapers directory, including subdirectories
-  selected_file=$(find "$wallDIR" -iname "$choice_basename.*" -print -quit)
+  selected_file=$(find "$WALLPAPERS_DIR" -iname "$choice_basename.*" -print -quit)
 
   if [[ -z "$selected_file" ]]; then
     echo "File not found. Selected choice: $choice"
