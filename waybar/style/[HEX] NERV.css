@@ -167,5 +167,6 @@ window#waybar {
 #clock {
 	color: rgb(255, 244, 210);
 	padding: 2px 7px;
+	margin-right: 12px;
 	font-size: 18px;
 }
