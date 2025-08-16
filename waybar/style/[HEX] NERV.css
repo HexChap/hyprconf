@@ -1,0 +1,171 @@
+/* =========================
+   Color Definitions
+   ========================= */
+@define-color foreground #FFA6A6;
+@define-color background #1D1B1B;
+@define-color background-alt rgba(29, 27, 27, 0.25);
+@define-color cursor #9C6060;
+
+@define-color color0 #494545;
+@define-color color1 #534A4A;
+@define-color color2 #5B4949;
+@define-color color3 #844444;
+@define-color color4 #894343;
+@define-color color5 #BE3C3C;
+@define-color color6 #CE3A3A;
+@define-color color7 #F67777;
+@define-color color8 #AD5353;
+@define-color color9 #5C4F4F;
+@define-color color10 #664E4E;
+@define-color color11 #9D4747;
+@define-color color12 #d75f00;
+@define-color color13 #EB3C3C;
+@define-color color14 #FF5524;
+@define-color color15 #F67777;
+
+/* =========================
+   Global Reset
+   ========================= */
+* {
+	padding: 0;
+	margin: 0;
+	min-height: 0;
+	text-shadow: none;
+	transition: none;
+	box-shadow: none;
+	border: none;
+	border-radius: 3px;
+}
+
+/* =========================
+   Window
+   ========================= */
+window#waybar {
+	background-color: rgba(35, 34, 34, 0);
+	padding: 0 6px;
+	font-family: 'Nimbus Sans', serif;
+	font-size: 16px;
+	font-weight: 700;
+	color: rgb(32, 32, 32);
+	border-radius: 0;
+}
+
+/* =========================
+   Module Containers
+   ========================= */
+.modules-left,
+.modules-center,
+.modules-right {
+	padding: 2px 7px;
+	margin: 5px 0;
+}
+
+/* =========================
+   Module Items
+   ========================= */
+#window,
+#cpu,
+#pulseaudio,
+#pulseaudio.muted,
+#battery,
+#battery.critical,
+#battery.warning,
+#network,
+#clock {
+	padding: 0 5px;
+	background-color: rgba(34, 34, 34, 0);
+}
+
+/* =========================
+   Workspaces
+   ========================= */
+#workspaces button {
+	color: rgb(255, 244, 210);
+	border: 2px solid @color12;
+	min-width: 20px;
+	padding: 0 4px;
+	margin: 0 3px;
+	background-color: rgba(34, 34, 34, 0);
+}
+
+#workspaces button:hover {
+	color: rgb(34, 34, 34);
+	background: @color8;
+}
+
+#workspaces button.visible,
+#workspaces button.visible:hover,
+#workspaces button.active,
+#workspaces button.active:hover {
+	background: transparent;
+	color: @color12;
+}
+
+#workspaces button.urgent {
+	color: rgb(34, 34, 34);
+	border: 2px solid rgba(204, 36, 29, 1);
+	background: rgb(234, 105, 98);
+}
+
+/* =========================
+   CPU & Window
+   ========================= */
+#window,
+#cpu {
+	color: #2B629C;
+	border: 2px solid #2B629C;
+}
+
+#cpu {
+	padding-top: 4.5px;
+}
+
+/* =========================
+   Pulseaudio
+   ========================= */
+#pulseaudio {
+	color: rgb(131, 165, 152);
+	border: 2px solid rgba(131, 165, 152, 1);
+}
+
+#pulseaudio.muted {
+	color: rgb(234, 105, 98);
+	border: 2px solid rgba(234, 105, 98, 1);
+}
+
+/* =========================
+   Battery
+   ========================= */
+#battery {
+	color: @color12;
+	border: 2px solid @color12;
+}
+
+#cpu.warning,
+#battery.warning {
+	color: #E39B17;
+	border: 2px solid #E39B17;
+}
+
+#cpu.critical,
+#battery.critical {
+	color: #8f0e8f;
+	border: 2px solid #8f0e8f;
+}
+
+/* =========================
+   Network
+   ========================= */
+#network {
+	color: @color12;
+	border: 2px solid @color12;
+}
+
+/* =========================
+   Clock
+   ========================= */
+#clock {
+	color: rgb(255, 244, 210);
+	padding: 2px 7px;
+	font-size: 18px;
+}

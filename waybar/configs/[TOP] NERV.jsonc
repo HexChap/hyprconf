@@ -1,0 +1,104 @@
+{
+  "include": ["$HOME/.config/waybar/ModulesWorkspaces"],
+  "layer": "top",
+  "height": 20,
+  "spacing": 5,
+
+  "modules-left": ["hyprland/workspaces#kanji", "hyprland/window"],
+
+  "modules-center": ["clock"],
+
+  "modules-right": ["cpu", "pulseaudio", "battery", "network"],
+
+  "hyprland/window": {
+    "format": "現在: <span color='#fff4d2' text_transform='uppercase'>{class}</span>",
+    "separate-outputs": true,
+    "icon": false,
+    "tooltip": false,
+  },
+
+  "network": {
+    "interval": 2,
+    "format": "回線",
+    "format-wifi": "回線: <span color='#fff4d2'>WIFI</span>",
+    "format-ethernet": "回線: <span color='#fff4d2'>ETH</span>",
+    "format-disconnected": "回線: <span color='#fff4d2'>LOCAL</span>",
+    "format-disabled": "回線: <span color='#fff4d2'>INTERNAL</span>",
+    "tooltip": true,
+    "tooltip-format": "<span text_transform='uppercase'>{essid}</span> {signalStrength}%",
+    "tooltip-format-disconnected": "INTERNAL NETWORK",
+    "tooltip-format-disabled": "INTERNAL NETWORK",
+    "states": {
+      "normal": 25,
+    },
+    "on-click": "ronema",
+  },
+
+  "cpu": {
+    "interval": 1,
+    "states": {
+      "good": 1,
+      "warning": 60,
+      "critical": 90,
+    },
+
+    "format": "CPU: <span color='#fff4d2'>{usage}%</span>",
+    "format-critical": "CPUCRIT: <span color='#fff4d2'>{usage}%</span>",
+    "format-warning": "CPUWARN: <span color='#fff4d2'>{usage}%</span>",
+    "format-alt-click": "click",
+    "format-alt": "{icon0}{icon1}{icon2}{icon3} {usage:>2}%",
+    "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+    "on-click-right": "gnome-system-monitor",
+  },
+
+  "pulseaudio": {
+    "format": "音響: <span color='#fff4d2'>{volume}%</span>",
+    "format-muted": "を消音: <span color='#fff4d2'>{volume}%</span>",
+    "format-bluetooth": "󰂰  <span color='#fff4d2'>{volume}%</span>",
+    "format-bluetooth-muted": "󰂲  <span color='#fff4d2'>{volume}%</span>",
+    "format-source": "<span color='#fff4d2'>{volume}%</span> ",
+    "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "on-click-right": "pavucontrol",
+    "tooltip": true,
+    "max-volume": 130,
+  },
+
+  "battery": {
+    "interval": 1,
+    "states": {
+      "good": 99,
+      "warning": 30,
+      "critical": 20,
+    },
+    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "format": "電池: <span color='#fff4d2'>{capacity}%</span>",
+    "format-critical": "CRITICAL: <span color='#fff4d2'>{capacity}%</span>!!",
+    "format-warning": "電池Warn: <span color='#fff4d2'>{capacity}%</span>",
+    "format-full": "電池: <span color='#fff4d2'>MAX</span>",
+    "format-charging": "電池: <span color='#fff4d2'>{capacity}%</span>↑",
+    "format-plugged": "電池: <span color='#fff4d2'>{capacity}%</span>",
+    "on-click-right": "$HOME/.config/hypr/UserScripts/MaxBattery.sh",
+    "tooltip": true,
+  },
+
+  "clock": {
+    "format": "<span text_transform='uppercase'>{:%a-%d〡%H:%M}</span>",
+    "format-alt": "<span text_transform='uppercase'>{:%d.%m.%y〡%H:%M:%S}</span>",
+    "interval": 1,
+    "tooltip": true,
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#ffead3'><b>{}</b></span>",
+        "days": "<span color='#ecc6d9'><b>{}</b></span>",
+        "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>",
+      },
+    },
+  },
+}
