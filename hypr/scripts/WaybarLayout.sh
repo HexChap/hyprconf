@@ -6,7 +6,7 @@ IFS=$'\n\t'
 
 # Define directories
 waybar_layouts="$HOME/.config/waybar/configs"
-waybar_config="$HOME/.config/waybar/config"
+waybar_config="$HOME/.config/waybar/config.jsonc"
 SCRIPTSDIR="$HOME/.config/hypr/scripts"
 rofi_config="$HOME/.config/rofi/config-waybar-layout.rasi"
 msg=' 🎌 NOTE: Some waybar LAYOUT NOT fully compatible with some STYLES'
@@ -40,10 +40,10 @@ main() {
 
     # Launch rofi with the annotated list, pre‑selecting the active row
     choice=$(printf '%s\n' "${options[@]}" \
-        | rofi -i -dmenu \
-               -config "$rofi_config" \
-               -mesg "$msg" \
-               -selected-row "$default_row"
+            | rofi -i -dmenu \
+            -config "$rofi_config" \
+            -mesg "$msg" \
+            -selected-row "$default_row"
     )
 
     # Exit if nothing chosen

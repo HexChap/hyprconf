@@ -114,10 +114,10 @@
 	"tooltip-format": "Left Click: Rofi Menu\nMiddle Click: Wallpaper Menu\nRight Click: Waybar Layout Menu",
 },
 // This is a custom cava visualizer
-"custom/cava_mviz": {
-	"exec": "$HOME/.config/hypr/scripts/WaybarCava.sh",
-	"format": "{}"
-},
+//"custom/cava_mviz": {
+//	"exec": "$HOME/.config/hypr/scripts/WaybarCava.sh",
+//	"format": "{}"
+//},
 
 "custom/playerctl": {
 	"format": "<span>{}</span>",

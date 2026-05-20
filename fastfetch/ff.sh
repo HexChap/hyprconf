@@ -138,13 +138,12 @@ apply_modules_padding_top() {
           )
         ' "$CLEAN_CONFIG" > "$TEMP_CONFIG"
     else
-        # no padding; just copy cleaned config to temp config
         cp "$CLEAN_CONFIG" "$TEMP_CONFIG"
     fi
 }
 
 measure_fastfetch_width() {
-    fastfetch -c "$TEMP_CONFIG" --logo "$1" --colors-block-range-start 0 --colors-block-range-end 0 --pipe \
+    fastfetch -c "$TEMP_CONFIG" --logo "$1" --pipe \
         | cat -t \
         | awk '/^\^/ {print}' \
         | sed -E 's/\^\[\[([[:digit:]]+)C/\1 /g' \
@@ -162,20 +161,15 @@ calculate_padding() {
     local cols="$1" max_width="$2" key_padding_left="$3"
     local total_width left_padding key_padding
 
-    total_width=$((max_width + gap))
-    left_padding=$(( (cols - total_width) / 2 ))
-    [[ $left_padding -lt 0 ]] && left_padding=0
-
-    # If centering is disabled, force leftPadding to 0
+    # If centering is disabled, skip width calculations entirely
     if ! is_enabled "$center_x"; then
         left_padding=0
-    fi
-
-    # Calculate key padding based on centering and logo position
-    if is_enabled "$center_x"; then
-        key_padding=$left_padding
+        key_padding=$key_padding_left
     else
-        key_padding=$((key_padding_left))
+        total_width=$((max_width + gap))
+        left_padding=$(( (cols - total_width) / 2 ))
+        [[ $left_padding -lt 0 ]] && left_padding=0
+        key_padding=$left_padding
     fi
 
     if is_enabled "$logo_right"; then
@@ -207,9 +201,11 @@ main() {
     # Apply modules padding top
     apply_modules_padding_top "$actual_modules_padding_top"
 
-    # Measure output width and calculate padding
-    local max_width
-    max_width=$(measure_fastfetch_width "$logo" || echo 0)
+    # Only measure output width if centering is enabled
+    local max_width=0
+    if is_enabled "$center_x"; then
+        max_width=$(measure_fastfetch_width "$logo" || echo 0)
+    fi
 
     read -r left_padding key_padding logo_pos logo_pad_opt < <(calculate_padding "$cols" "$max_width" "$key_padding_left")
 

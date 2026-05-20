@@ -7,4 +7,15 @@
 
 {
 
+"custom/claude-usage": {
+	"interval": 60,
+	"return-type": "json",
+	"exec": "python3 $HOME/.config/waybar/scripts/claude-usage.py",
+	"on-click": "$HOME/.config/waybar/scripts/claude-usage-toggle.sh",
+	"exec-on-event": true,
+	"signal": 9,
+	"tooltip": true,
+	"escape": false,
+},
+
 }

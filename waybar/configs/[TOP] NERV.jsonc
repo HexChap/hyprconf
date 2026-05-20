@@ -1,5 +1,5 @@
 {
-  "include": ["$HOME/.config/waybar/ModulesWorkspaces"],
+  "include": ["$HOME/.config/waybar/ModulesWorkspaces", "$HOME/.config/waybar/UserModules"],
   "layer": "top",
   "height": 20,
   "spacing": 5,
@@ -8,7 +8,7 @@
 
   "modules-center": ["clock"],
 
-  "modules-right": ["cpu", "pulseaudio", "battery", "network"],
+  "modules-right": ["custom/claude-usage", "cpu", "pulseaudio", "battery", "network"],
 
   "hyprland/window": {
     "format": "現在: <span color='#fff4d2' text_transform='uppercase'>{class}</span>",
@@ -48,6 +48,7 @@
     "format-alt-click": "click",
     "format-alt": "{icon0}{icon1}{icon2}{icon3} {usage:>2}%",
     "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+    "on-click": "$HOME/.config/hypr/UserScripts/CyclePowerProfiles.sh",
     "on-click-right": "gnome-system-monitor",
   },
 
@@ -87,6 +88,8 @@
     "interval": 1,
     "tooltip": true,
     "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "format-alt-click": "click-right",
+    "on-click": "exec swaync-client -t -sw",
     "calendar": {
       "mode": "year",
       "mode-mon-col": 3,
