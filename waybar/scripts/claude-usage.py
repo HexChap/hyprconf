@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Waybar module: Claude Code rate-limit usage in NERV style."""
+
 import json
 import os
 from datetime import datetime, timezone
@@ -60,33 +61,48 @@ try:
 
     pct_str = span(f"{pct}%") if pct is not None else span("—")
     reset_str = f" ({left})" if left else ""
-    text = f"{label}: {pct_str}{reset_str}"
+    text = f"{label}: {pct_str}"
 
     lines = ["Claude Code Usage", "━━━━━━━━━━━━━━━━━━━━"]
     if fh_pct is not None:
-        lines.append(f"5h session : {fh_pct}%" + (f" (resets in {fh_left})" if fh_left else ""))
+        lines.append(
+            f"5h: {fh_pct}%" + (f" (resets in {fh_left})" if fh_left else "")
+        )
     if sd_pct is not None:
-        lines.append(f"7-day      : {sd_pct}%" + (f" (resets in {sd_left})" if sd_left else ""))
+        lines.append(
+            f"7d: {sd_pct}%" + (f" (resets in {sd_left})" if sd_left else "")
+        )
     if age_s > 300:
         lines.append(f"⚠ data is {int(age_s // 60)}m old")
-    lines.append("click to toggle 5h ⟷ weekly")
 
-    print(json.dumps({
-        "text": text,
-        "tooltip": "\n".join(lines),
-        "class": "claude-usage",
-        "alt": mode,
-    }))
+    print(
+        json.dumps(
+            {
+                "text": text,
+                "tooltip": "\n".join(lines),
+                "class": "claude-usage",
+                "alt": mode,
+            }
+        )
+    )
 
 except FileNotFoundError:
-    print(json.dumps({
-        "text": f"使用量: {span('—')}",
-        "tooltip": "No data yet — start a Claude Code session",
-        "class": "claude-usage-inactive",
-    }))
+    print(
+        json.dumps(
+            {
+                "text": f"使用量: {span('—')}",
+                "tooltip": "No data yet — start a Claude Code session",
+                "class": "claude-usage-inactive",
+            }
+        )
+    )
 except Exception as e:
-    print(json.dumps({
-        "text": "使用量: ?",
-        "tooltip": f"Error: {e}",
-        "class": "claude-usage-error",
-    }))
+    print(
+        json.dumps(
+            {
+                "text": "使用量: ?",
+                "tooltip": f"Error: {e}",
+                "class": "claude-usage-error",
+            }
+        )
+    )

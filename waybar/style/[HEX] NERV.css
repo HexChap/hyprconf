@@ -71,7 +71,8 @@ window#waybar {
 #battery.critical,
 #battery.warning,
 #network,
-#clock {
+#clock,
+#custom-claude-usage {
 	padding: 0 5px;
 	background-color: rgba(34, 34, 34, 0);
 }
@@ -169,4 +170,12 @@ window#waybar {
 	padding: 2px 7px;
 	margin-right: 12px;
 	font-size: 18px;
+}
+
+/* =========================
+   Claude Usage
+   ========================= */
+#custom-claude-usage {
+	color: #2B629C;
+	border: 2px solid #2B629C;
 }
